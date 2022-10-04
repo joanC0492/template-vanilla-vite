@@ -1,9 +1,11 @@
-import "../scss/style.scss";
+import "~scss/style.scss";
 // import * as bootstrap from "bootstrap";
 import { Popover, Modal } from "bootstrap";
 
 import typescriptLogo from "../typescript.svg";
 import { setupCounter } from "./counter";
+
+import style from "~scss/App.module.scss";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="container py-5">
@@ -23,7 +25,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         <div class="mb-2">
           <button class="btn btn-dark w-50" id="counter" type="button"></button>
         </div>
-        <p>
+        <p class="${style.appTitle}">
           Click on the Vite and TypeScript logos to learn more
         </p>        
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

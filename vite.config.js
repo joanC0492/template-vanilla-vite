@@ -9,11 +9,26 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     resolve: {
       alias: {
         "~bootstrap": resolve(__dirname, "node_modules/bootstrap"),
+        "~assets": resolve(__dirname, "src/assets"),
+        "~scss": resolve(__dirname, "src/scss"),
+        "~ts": resolve(__dirname, "src/ts"),
       },
     },
     server: {
       port,
       hot: true,
+    },
+    build: {
+      outDir: "../dist",
+      sourcemap: true,
+      cssCodeSplit: true,
+      // rollupOptions: {
+      //   output: {
+      //     entryFileNames: "assets/[name].[hash].js",
+      //     chunkFileNames: "assets/[name].[hash].js",
+      //     assetFileNames: "assets/[name].[hash].[ext]",
+      //   },
+      // },
     },
   };
 });
