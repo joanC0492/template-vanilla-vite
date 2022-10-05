@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import htmlPurge from "vite-plugin-purgecss";
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
   const port = 8081;
@@ -18,17 +19,29 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       port,
       hot: true,
     },
+    plugins: [
+      htmlPurge([
+        htmlPurge({
+          content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.js"],
+          css: ["./src/**/*.css", "./src/**/*.scss"],
+        }),
+      ]),
+    ],
     build: {
       outDir: "../dist",
       sourcemap: true,
       cssCodeSplit: true,
-      // rollupOptions: {
-      //   output: {
-      //     entryFileNames: "assets/[name].[hash].js",
-      //     chunkFileNames: "assets/[name].[hash].js",
-      //     assetFileNames: "assets/[name].[hash].[ext]",
-      //   },
-      // },
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, "src", "index.html"),
+          about: resolve(__dirname, "src", "about.html"),
+        },
+        //   output: {
+        //     entryFileNames: "assets/[name].[hash].js",
+        //     chunkFileNames: "assets/[name].[hash].js",
+        //     assetFileNames: "assets/[name].[hash].[ext]",
+        //   },
+      },
     },
   };
 });
